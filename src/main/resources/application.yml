@@ -1,0 +1,46 @@
+server:
+  port: 8091
+
+spring:
+  application:
+    name: music-info-service
+  jpa:
+    hibernate:
+      ddl-auto: create
+  datasource:
+    url: jdbc:mysql://library-mysql:3306/springboot_library
+    username: root
+    password: Library@123
+#    url: jdbc:mysql://localhost:3306/springboot_library
+#    username: springbootuser
+#    password: mysqlspringbootpassword
+    platform: mysql
+    initialization-mode: always
+    generated-unique-name: false
+  h2:
+    console:
+      enabled: true
+
+logging:
+  level:
+    root: info
+    com.library.music: trace
+
+management:
+  endpoint:
+    web:
+      exposure:
+        include: mappings
+    health:
+      show-details: always
+  info:
+    build:
+      enabled: true
+    env:
+      enabled: true
+  health:
+    circuitbreakers:
+      enabled: true
+    web:
+      exposure:
+        include: health

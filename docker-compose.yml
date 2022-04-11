@@ -1,0 +1,29 @@
+version: "3"
+services:
+  library-mysql:
+    image: mysql:8
+    container_name: library-mysql
+    networks:
+      - music-library
+    environment:
+      - MYSQL_ROOT_PASSWORD=Library@123
+      - MYSQL_DATABASE=springboot_library
+    restart: always
+
+  library:
+    image: library
+    container_name: library
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8091:8091"
+    networks:
+      - music-library
+    depends_on:
+      - library-mysql
+    restart: always
+
+networks:
+  music-library:
+    driver: bridge
